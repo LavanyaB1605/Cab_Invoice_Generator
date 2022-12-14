@@ -2,7 +2,6 @@ package org.example.InvoiceGenerator;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -32,16 +31,16 @@ public class InvoiceGeneratorTest {
 
     @Test
     public void givenMultipleRides_ShouldReturnInvoiceSummery() {
-        Ride[] rides={new Ride(1.0,5),
-                new Ride(0.2,2)};
+        Ride[] rides={new Ride(1.0,5, PremiumRide.Premium),
+                new Ride(0.2,2, PremiumRide.Premium)};
         InvoiceSummary summary=invoiceGenerator.calculateFare(rides);
         InvoiceSummary expectedInvoiceSummery=new InvoiceSummary(2,20);
         Assertions.assertEquals(expectedInvoiceSummery,summary);
     }
     @Test
     public void ReturnTotalRidesTotalFareAndAverageFarePerRide() {
-        Ride[] rides = {new Ride(1.0, 5),
-                new Ride(0.2, 2)};
+        Ride[] rides = {new Ride(1.0, 5, PremiumRide.Premium),
+                new Ride(0.2, 2, PremiumRide.Premium)};
         double totalFare = invoiceGenerator.calculateTotalFare(rides);
         int noOfRides = invoiceGenerator.numberOfRides(rides);
         double averageFare = invoiceGenerator.calculateAverageFarePerRide(rides);
@@ -52,12 +51,22 @@ public class InvoiceGeneratorTest {
     @Test
     public void givenUserIdReturnTheInvoice() {
         String userID = "Driver1";
-        Ride[] rides = new Ride[]{new Ride(1.0, 5),
-                new Ride(0.2, 2)
+        Ride[] rides = new Ride[]{new Ride(1.0, 5, PremiumRide.Premium),
+                new Ride(0.2, 2, PremiumRide.Premium)
         };
         invoiceGenerator.addRides(userID, rides);
         double rideDetails = invoiceGenerator.getRidesDetails(userID);
         int NoOfRides = invoiceGenerator.numberOfRides(rides);
         Assertions.assertEquals(20, rideDetails, 0.0);
     }
+/*    @Test
+    public void addingPremiumAndNormalRide() {
+        String userID = "Driver1";
+        Ride[] rides = new Ride[]{new Ride(10, 5, PremiumRide.Premium),
+                new Ride(20, 2, PremiumRide.Normal)
+        };
+        invoiceGenerator.addRides(userID, rides);
+        double rideDetails = invoiceGenerator.getRidesDetails(userID);
+        Assertions.assertEquals(307,rideDetails, 0.0);
+    }*/
 }

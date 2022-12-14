@@ -9,13 +9,14 @@ public class RideRepository {
         userRides = new HashMap<>();
     }
 
-    public static void addRides(String userID, Ride[] rides) {
-        ArrayList<Ride> rideList = this.userRides.get(userID);
+    public void addRides(String userID, Ride[] rides) {
+        ArrayList<Ride> rideList =  this.userRides.get(userID);
         if (rideList == null)
             this.userRides.putIfAbsent(userID, new ArrayList<>(Arrays.asList(rides)));
     }
 
-    public static Ride[] getRides(String userID) {
+    public Ride[] getRides(String userID) {
+
         return this.userRides.get(userID).toArray(new Ride[0]);
     }
 }
