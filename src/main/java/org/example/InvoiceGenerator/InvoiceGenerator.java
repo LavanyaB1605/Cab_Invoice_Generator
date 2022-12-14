@@ -33,5 +33,12 @@ public class InvoiceGenerator {
         double averageFare = totalFare/numberOfRides;
         return averageFare;
     }
+    public double getRidesDetails(String userID) {
+        return this.calculateTotalFare(RideRepository.getRides(userID));
+    }
+
+    public void addRides(String userID, Ride[] rides) {
+        RideRepository.addRides(userID, rides);
+    }
 
 }

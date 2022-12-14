@@ -49,4 +49,15 @@ public class InvoiceGeneratorTest {
         Assertions.assertEquals(2, noOfRides,0.0);
         Assertions.assertEquals(10, averageFare, 0.0);
     }
+    @Test
+    public void givenUserIdReturnTheInvoice() {
+        String userID = "Driver1";
+        Ride[] rides = new Ride[]{new Ride(1.0, 5),
+                new Ride(0.2, 2)
+        };
+        invoiceGenerator.addRides(userID, rides);
+        double rideDetails = invoiceGenerator.getRidesDetails(userID);
+        int NoOfRides = invoiceGenerator.numberOfRides(rides);
+        Assertions.assertEquals(20, rideDetails, 0.0);
+    }
 }
